@@ -22,8 +22,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Fragment where the game is played
@@ -105,10 +107,18 @@ class GameFragment : Fragment() {
         nextWord()
     }
 
+
     /**
      * Moves to the next word in the list
      */
     private fun nextWord() {
+        //implementación del reto de la práctica: se desactivan los botones cuando no quedan palabras en la lista
+        if (wordList.isEmpty()) {
+            binding.correctButton.isEnabled = false
+            binding.skipButton.isEnabled = false
+            Snackbar.make(view as View, R.string.empty_list, Snackbar.LENGTH_LONG).show()
+        }
+
         if (!wordList.isEmpty()) {
             //Select and remove a word from the list
             word = wordList.removeAt(0)
