@@ -28,6 +28,7 @@ import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
+import androidx.lifecycle.Observer
 
 
 
@@ -59,8 +60,15 @@ class GameFragment : Fragment() {
         binding.correctButton.setOnClickListener { onCorrect() }
         binding.skipButton.setOnClickListener { onSkip() }
         binding.endGameButton.setOnClickListener { onEndGame(it)}
-        updateScoreText()
-        updateWordText()
+        //se establece una relación de observación de LiveData
+        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
+            binding.scoreText.text = newScore?.toString()?:getString(R.string.hold_err_text)
+        })
+
+        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
+            binding.wordText.text = if (GameViewModel.NO_MORE_WORDS.equals(newWord)) getString(R.string.empty_list) else newWord?.toString()?:getString(R.string.hold_err_text)
+        })
+
         return binding.root
     }
 
@@ -69,14 +77,10 @@ class GameFragment : Fragment() {
 
     private fun onSkip() {
         viewModel.onSkip()
-        updateScoreText()
-        updateScoreText()
     }
 
     private fun onCorrect() {
         viewModel.onCorrect()
-        updateWordText()
-        updateScoreText()
     }
 
     private fun onEndGame (view: View) {
@@ -85,14 +89,6 @@ class GameFragment : Fragment() {
         action.score = viewModel.score.value?:0
         view.findNavController().navigate(action)
     }
+    
 
-    /** Methods for updating the UI **/
-
-    private fun updateWordText() {
-        binding.wordText.text = if (GameViewModel.NO_MORE_WORDS.equals(viewModel.word.value)) getString(R.string.empty_list) else viewModel.word.value
-    }
-
-    private fun updateScoreText() {
-        binding.scoreText.text = viewModel.score.value?.toString()?:getString(R.string.hold_err_text)
-    }
 }
