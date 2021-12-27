@@ -89,6 +89,6 @@ class GameFragment : Fragment() {
         action.score = viewModel.score.value?:0
         view.findNavController().navigate(action)
     }
-    
+
 
 }
