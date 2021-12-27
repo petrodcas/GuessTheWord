@@ -27,4 +27,5 @@
     <string name="word_is">The word is…</string>
     <string name="empty_list">No words left to show.</string>
     <string name="snack_endGame">Game has just finished.</string>
+    <string name="hold_err_text">You should not be reading this.</string>
 </resources>

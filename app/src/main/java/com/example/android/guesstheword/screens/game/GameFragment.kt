@@ -82,17 +82,17 @@ class GameFragment : Fragment() {
     private fun onEndGame (view: View) {
         Snackbar.make(view, getString(R.string.snack_endGame), Snackbar.LENGTH_SHORT).show()
         val action = GameFragmentDirections.actionGameToScore()
-        action.score = viewModel.score
+        action.score = viewModel.score.value?:0
         view.findNavController().navigate(action)
     }
 
     /** Methods for updating the UI **/
 
     private fun updateWordText() {
-        binding.wordText.text = if (viewModel.word.equals(GameViewModel.NO_MORE_WORDS)) getString(R.string.empty_list) else viewModel.word
+        binding.wordText.text = if (GameViewModel.NO_MORE_WORDS.equals(viewModel.word.value)) getString(R.string.empty_list) else viewModel.word.value
     }
 
     private fun updateScoreText() {
-        binding.scoreText.text = viewModel.score.toString()
+        binding.scoreText.text = viewModel.score.value?.toString()?:getString(R.string.hold_err_text)
     }
 }

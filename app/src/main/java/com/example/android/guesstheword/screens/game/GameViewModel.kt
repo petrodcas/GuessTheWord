@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import android.util.Log
 import android.view.View
 import com.example.android.guesstheword.R
+import androidx.lifecycle.MutableLiveData
 
 
 
@@ -15,10 +16,10 @@ class GameViewModel : ViewModel() {
 
 
     // The current word
-    var word = ""
+    val word = MutableLiveData<String>()
 
     // The current score
-    var score = 0
+    var score = MutableLiveData<Int>()
 
     // The list of words - the front of the list is the next word to guess
     lateinit var wordList: MutableList<String>
@@ -26,6 +27,8 @@ class GameViewModel : ViewModel() {
 
     init {
         Log.i("GameViewModel", "GameViewModel creado!")
+        word.value = ""
+        score.value = 0
         resetList()
         nextWord()
     }
@@ -71,14 +74,14 @@ class GameViewModel : ViewModel() {
 
     fun onSkip() {
         if (!wordList.isEmpty()) {
-            score--
+            score.value = (score.value)?.minus(1)
         }
         nextWord()
     }
 
     fun onCorrect() {
         if (!wordList.isEmpty()) {
-            score++
+            score.value = (score.value)?.plus(1)
         }
         nextWord()
     }
@@ -90,10 +93,10 @@ class GameViewModel : ViewModel() {
     private fun nextWord() {
         if (!wordList.isEmpty()) {
             //Select and remove a word from the list
-            word = wordList.removeAt(0)
+            word.value = wordList.removeAt(0)
         }
         else {
-            word = NO_MORE_WORDS
+            word.value = NO_MORE_WORDS
         }
     }
 
