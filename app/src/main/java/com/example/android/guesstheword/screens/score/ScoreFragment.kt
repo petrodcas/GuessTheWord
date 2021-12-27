@@ -26,7 +26,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.ScoreFragmentBinding
-
+import androidx.lifecycle.Observer
 
 /**
  * Fragment where the final score is shown, after the game is over
@@ -55,7 +55,9 @@ class ScoreFragment : Fragment() {
         viewModelFactory = ScoreViewModelFactory(ScoreFragmentArgs.fromBundle(requireArguments()).score)
         viewModel = ViewModelProvider(this, viewModelFactory)[ScoreViewModel::class.java]
 
-        binding.scoreText.text = viewModel.score.toString()
+        viewModel.score.observe(viewLifecycleOwner, Observer { finalScore ->
+            binding.scoreText.text = finalScore?.toString()?:getString(R.string.hold_err_text)
+        })
 
         return binding.root
     }
