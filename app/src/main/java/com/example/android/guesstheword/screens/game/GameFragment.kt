@@ -69,6 +69,10 @@ class GameFragment : Fragment() {
             binding.wordText.text = if (GameViewModel.NO_MORE_WORDS.equals(newWord)) getString(R.string.empty_list) else newWord?.toString()?:getString(R.string.hold_err_text)
         })
 
+        viewModel.gameEnded.observe(viewLifecycleOwner, Observer { hasFinished ->
+            if (hasFinished) onEndGame(view as View)
+        })
+
         return binding.root
     }
 
@@ -89,6 +93,7 @@ class GameFragment : Fragment() {
         action.score = viewModel.score.value?:0
         view.findNavController().navigate(action)
     }
+
 
 
 }
