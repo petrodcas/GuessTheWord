@@ -70,12 +70,16 @@ class GameViewModel : ViewModel() {
     /** Methods for buttons presses **/
 
     fun onSkip() {
-        score--
+        if (!wordList.isEmpty()) {
+            score--
+        }
         nextWord()
     }
 
     fun onCorrect() {
-        score++
+        if (!wordList.isEmpty()) {
+            score++
+        }
         nextWord()
     }
 

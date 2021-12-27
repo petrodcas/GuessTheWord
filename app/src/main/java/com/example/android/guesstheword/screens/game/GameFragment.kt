@@ -24,10 +24,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
 import com.google.android.material.snackbar.Snackbar
+import androidx.navigation.findNavController
+
 
 
 /**
@@ -57,6 +58,7 @@ class GameFragment : Fragment() {
 
         binding.correctButton.setOnClickListener { onCorrect() }
         binding.skipButton.setOnClickListener { onSkip() }
+        binding.endGameButton.setOnClickListener { onEndGame(it)}
         updateScoreText()
         updateWordText()
         return binding.root
@@ -75,6 +77,13 @@ class GameFragment : Fragment() {
         viewModel.onCorrect()
         updateWordText()
         updateScoreText()
+    }
+
+    private fun onEndGame (view: View) {
+        Snackbar.make(view, getString(R.string.snack_endGame), Snackbar.LENGTH_SHORT).show()
+        val action = GameFragmentDirections.actionGameToScore()
+        action.score = viewModel.score
+        view.findNavController().navigate(action)
     }
 
     /** Methods for updating the UI **/
