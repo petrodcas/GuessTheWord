@@ -16,11 +16,15 @@
 
 package com.example.android.guesstheword.screens.game
 
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.graphics.toColor
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -29,6 +33,7 @@ import com.example.android.guesstheword.databinding.GameFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
 import androidx.lifecycle.Observer
+import androidx.core.content.ContextCompat
 
 
 
@@ -60,6 +65,9 @@ class GameFragment : Fragment() {
         binding.gameViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        viewModel.currentTime.observe(viewLifecycleOwner, Observer {
+            time -> if (time <= 10) colorRed(binding.timerText)
+        })
 
         viewModel.gameEnded.observe(viewLifecycleOwner, Observer { hasFinished ->
             if (hasFinished) onEndGame(view as View)
@@ -78,6 +86,10 @@ class GameFragment : Fragment() {
         view.findNavController().navigate(action)
     }
 
-
+    private fun colorRed (textView: TextView) {
+        Log.d("::::Coloreado", "Se va a colorear de rojo. Color actual: ${binding.timerText.currentTextColor.toString()}")
+        textView.setTextColor(ContextCompat.getColor(context as Context, R.color.selected_red_color))
+        Log.d("::::Coloreado", "Fin del coloreado de rojo. Color actual: ${binding.timerText.currentTextColor.toString()}")
+    }
 
 }

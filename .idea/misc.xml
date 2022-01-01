@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/ProyectosAndroidStudio/GuessTheWord-Starter/app/src/main/res/layout/game_fragment.xml" value="0.2753623188405797" />
-        <entry key="..\:/ProyectosAndroidStudio/GuessTheWord-Starter/app/src/main/res/layout/main_activity.xml" value="0.2753623188405797" />
-        <entry key="..\:/ProyectosAndroidStudio/GuessTheWord-Starter/app/src/main/res/layout/score_fragment.xml" value="0.2753623188405797" />
-        <entry key="..\:/ProyectosAndroidStudio/GuessTheWord-Starter/app/src/main/res/layout/title_fragment.xml" value="0.2753623188405797" />
-        <entry key="..\:/ProyectosAndroidStudio/GuessTheWord/app/src/main/res/layout/game_fragment.xml" value="0.36666666666666664" />
-        <entry key="..\:/ProyectosAndroidStudio/GuessTheWord/app/src/main/res/layout/score_fragment.xml" value="0.20520833333333333" />
-      </map>
-    </option>
-  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
