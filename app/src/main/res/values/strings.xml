@@ -28,4 +28,6 @@
     <string name="empty_list">No words left to show.</string>
     <string name="snack_endGame">Game has just finished.</string>
     <string name="hold_err_text">You should not be reading this.</string>
+    <string name="quote_format">\"%1$s\"</string>
+    <string name="score_format">Current Score: %1$d</string>
 </resources>

@@ -11,9 +11,6 @@ import androidx.lifecycle.LiveData
 
 
 class GameViewModel : ViewModel() {
-    companion object {
-        const val NO_MORE_WORDS: String = ""
-    }
 
 
     // The current word
@@ -107,7 +104,6 @@ class GameViewModel : ViewModel() {
             _word.value = wordList.removeAt(0)
         }
         else {
-            //_word.value = NO_MORE_WORDS
             onGameFinish()
         }
     }

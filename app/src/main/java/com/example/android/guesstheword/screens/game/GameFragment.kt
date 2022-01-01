@@ -57,17 +57,9 @@ class GameFragment : Fragment() {
         Log.i("GameFragment", "Called ViewModelProvider.get")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener { onCorrect() }
-        binding.skipButton.setOnClickListener { onSkip() }
-        binding.endGameButton.setOnClickListener { onEndGame(it)}
-        //se establece una relación de observación de LiveData
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
-            binding.scoreText.text = newScore?.toString()?:getString(R.string.hold_err_text)
-        })
+        binding.gameViewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
-            binding.wordText.text = if (GameViewModel.NO_MORE_WORDS.equals(newWord)) getString(R.string.empty_list) else newWord?.toString()?:getString(R.string.hold_err_text)
-        })
 
         viewModel.gameEnded.observe(viewLifecycleOwner, Observer { hasFinished ->
             if (hasFinished) onEndGame(view as View)
@@ -78,14 +70,6 @@ class GameFragment : Fragment() {
 
 
     /** Methods for button presses */
-
-    private fun onSkip() {
-        viewModel.onSkip()
-    }
-
-    private fun onCorrect() {
-        viewModel.onCorrect()
-    }
 
     private fun onEndGame (view: View) {
         Snackbar.make(view, getString(R.string.snack_endGame), Snackbar.LENGTH_SHORT).show()
